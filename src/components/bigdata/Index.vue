@@ -29,7 +29,12 @@
         </div>
       </board>
       <board class="board" label="行政许可认定统计">
-        <pie />
+        <pie
+          :style="{
+            width:'400px',
+            height:'400px'
+          }"
+        />
       </board>
       <board class="board" label="综合复查统计">
         <mulit-chart :box-style="{width:'400px', height:'400px'}"/>

@@ -1,10 +1,17 @@
 <template>
-  <div id='pie' style='width: 400px; height: 370px'></div>
+  <div id='pie'></div>
 </template>
 <script>
 export default {
   props: {
-    seriesData: {
+    boxSize: {
+      type: Object,
+      default: () => ({
+        width: 400,
+        height: 400
+      })
+    },
+    data: {
       type: Array,
       default: () => [
         { name: '行政许可事项认定', value: 100 },
@@ -13,14 +20,33 @@ export default {
         { name: '三乱整治', value: 20 }
       ]
     },
-    legendData: {
+    pieRadius: {
       type: Array,
-      default: () => [
-        '行政许可事项认定',
-        '跨部门涉嫌违法事项认定',
-        '犬类管理',
-        '三乱整治'
-      ]
+      default: () => ['34%', '45%']
+    },
+    piePosition: {
+      type: Array,
+      default: () => ['40%', '32%']
+    },
+    pieBorder: {
+      type: String,
+      default: '#070C11'
+    },
+    legendPosition: {
+      type: Object,
+      default: () => ({
+        bottom: 50,
+        left: 50,
+        height: 50
+      })
+    }
+  },
+  computed: {
+    seriesData () {
+      return this.data
+    },
+    legendData () {
+      return this.data.map(i => i.name)
     }
   },
   mounted () {
@@ -33,15 +59,13 @@ export default {
       series: [
         {
           type: 'pie',
-          radius: ['34%', '45%'],
-          center: ['40%', '32%'],
+          radius: this.pieRadius,
+          center: this.piePosition,
           hoverAnimation: true,
           z: 10,
           itemStyle: {
-            normal: {
-              borderWidth: 3,
-              borderColor: '#070C11'
-            }
+            borderWidth: 1,
+            borderColor: this.pieBorder
           },
           label: {
             show: false,
@@ -56,9 +80,7 @@ export default {
       legend: {
         orient: 'vertical',
         icon: 'rect',
-        bottom: 50,
-        left: 50,
-        height: 50,
+        ...this.legendPosition,
         textStyle: {
           align: 'left',
           verticalAlign: 'middle',
