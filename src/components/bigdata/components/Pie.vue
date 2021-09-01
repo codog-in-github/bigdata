@@ -1,16 +1,9 @@
 <template>
-  <div id='pie'></div>
+  <div id='pie' class="box"></div>
 </template>
 <script>
 export default {
   props: {
-    boxSize: {
-      type: Object,
-      default: () => ({
-        width: 400,
-        height: 400
-      })
-    },
     data: {
       type: Array,
       default: () => [
@@ -108,4 +101,5 @@ export default {
 }
 </script>
 <style lang='less' scoped>
+box
 </style>
