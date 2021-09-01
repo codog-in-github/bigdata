@@ -1,20 +1,53 @@
 <template>
-    <div id="mulit" :style="boxStyle"></div>
+    <div :id="id"></div>
 </template>
 <script>
 export default {
   props: {
-    boxStyle: {
-      type: Object,
-      default: () => ({
-        height: '400px',
-        width: '400px'
-      })
+    id: {
+      type: String,
+      default: 'barChart'
+    },
+    data: {
+      type: Array,
+      default: () => [{
+        name: '企业信息查询',
+        value: 100
+      }, {
+        name: '行驶证信息查询',
+        value: 179
+      }, {
+        name: '不动产信息查询',
+        value: 188
+      }, {
+        name: '建设工程规划信息查询',
+        value: 100
+      }, {
+        name: '不动产信息查询',
+        value: 178
+      }]
+    },
+    xLine: {
+      type: Boolean,
+      default: true
+    },
+    yLine: {
+      type: Boolean,
+      default: true
+    },
+    yLable: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    xData () {
+      return this.data.map(item => item.name)
     }
   },
   mounted () {
-    const mulitChart = this.$echarts.init(document.getElementById('mulit'))
-    mulitChart.setOption({
+    const chart = this.$echarts.init(document.getElementById(this.id))
+    chart.setOption({
       grid: {
         show: false,
         left: 30,
@@ -22,7 +55,7 @@ export default {
         top: 20
       },
       xAxis: {
-        data: ['企业信息查询', '行驶证信息查询', '不动产信息查询', '建设工程规划信息查询', '油烟信息查询'],
+        data: this.xData,
         color: '#fff',
         axisLabel: {
           rotate: 30,
@@ -30,6 +63,7 @@ export default {
           fontSize: 9
         },
         axisLine: {
+          show: this.xLine,
           lineStyle: {
             color: '#2297df'
           }
@@ -41,36 +75,25 @@ export default {
       yAxis: {
         splitNumber: 4,
         splitLine: {
-          show: false
+          show: this.yLine
         },
         axisLine: {
+          show: this.yLine,
           lineStyle: {
             color: '#2297df'
           }
         },
         axisTick: {
           show: false
+        },
+        axisLabel: {
+          show: this.yLabel
         }
       },
       series: [{
         name: 'Sale',
         type: 'bar',
-        data: [{
-          name: '企业信息查询',
-          value: 100
-        }, {
-          name: '行驶证信息查询',
-          value: 179
-        }, {
-          name: '不动产信息查询',
-          value: 188
-        }, {
-          name: '建设工程规划信息查询',
-          value: 100
-        }, {
-          name: '不动产信息查询',
-          value: 178
-        }],
+        data: this.data,
         itemStyle: {
           color: {
             x: 0,

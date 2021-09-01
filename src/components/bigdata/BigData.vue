@@ -33,5 +33,7 @@ export default {
   width: 100vw;
   background: linear-gradient(to right, #051f3a, #080808, #051f3a);
   overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
 }
 </style>

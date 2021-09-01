@@ -29,15 +29,10 @@
         </div>
       </board>
       <board class="board" label="行政许可认定统计">
-        <pie
-          :style="{
-            width:'400px',
-            height:'400px'
-          }"
-        />
+        <pie/>
       </board>
       <board class="board" label="综合复查统计">
-        <mulit-chart :box-style="{width:'400px', height:'400px'}"/>
+        <bar id="mulit" style="width:400px;height:400px"/>
       </board>
     </div>
   </main>
@@ -46,7 +41,7 @@
 import Board from './components/Board'
 import PassRate from './components/PassRate'
 import CenterMap from './components/CenterMap'
-import MulitChart from './components/MulitChart'
+import Bar from './components/Bar'
 import Horizontal from './components/Horizontal'
 import Pie from './components/Pie'
 
@@ -56,7 +51,7 @@ export default {
     Board,
     PassRate,
     CenterMap,
-    MulitChart,
+    Bar,
     Horizontal,
     Pie
   },
@@ -137,12 +132,14 @@ main{
      display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex: 1 1 auto;
   }
   .down{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: -35px;
+    flex: 1 1 auto;
   }
 }
 .board_info{

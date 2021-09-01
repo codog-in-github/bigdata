@@ -1,7 +1,9 @@
 <template>
   <div class="board">
     <div class="label shadow"><span class="gradient-text">{{label}}</span></div>
-    <slot></slot>
+    <div class="slot">
+      <slot></slot>
+    </div>
   </div>
 </template>
 <script>
@@ -16,7 +18,19 @@ export default {
 </script>
 <style lang="less" scoped>
 .board{
+  display: flex;
+  flex-flow: nowrap column;
   padding: 30px;
+
+  .slot{
+    flex: 1 1 auto;
+    height: 1px;
+  }
+}
+
+/deep/ .slot > *{
+  width: 100%;
+  height: 100%;
 }
 .label{
   width: 300px;
