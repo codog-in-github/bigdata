@@ -1,5 +1,5 @@
 <template>
-      <div id="chart" style="width:450px;height:300px;"></div>
+      <div id="chart"></div>
 </template>
 <script>
 export default {

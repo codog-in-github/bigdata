@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
- <div id="map" style="width:600px;height:400px;overflow:hidden;"></div>
+ <div id="map" class="map"></div>
 </div>
 </template>
 <script>
@@ -116,7 +116,12 @@ export default {
 <style lang="less" scoped>
 .map-box{
   position: relative;
-    color: #fff;
+  color: #fff;
+
+  .map{
+    width: 100%;
+    height: 100%;
+  }
 
   .message{
     position: absolute;

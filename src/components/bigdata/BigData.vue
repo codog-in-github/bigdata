@@ -1,7 +1,7 @@
 <template>
   <div class="background">
     <Header :active-index="activeIndex"/>
-    <router-view></router-view>
+    <router-view class="view"></router-view>
   </div>
 </template>
 <script>
@@ -35,5 +35,10 @@ export default {
   overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
+
+  .view{
+    flex: 1 1 auto;
+    height: 1px;
+  }
 }
 </style>

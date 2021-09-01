@@ -32,7 +32,7 @@
         <pie/>
       </board>
       <board class="board" label="综合复查统计">
-        <bar id="mulit" style="width:400px;height:400px"/>
+        <bar id="mulit"/>
       </board>
     </div>
   </main>
@@ -122,24 +122,25 @@ export default {
 <style lang="less" scoped>
 main{
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   justify-content: space-between;
 
-  // & > * + *{
-  //   margin-left: 50px;
-  // }
-  .up{
-     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex: 1 1 auto;
-  }
+  .up,
   .down{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: -35px;
+    height: 50%;
     flex: 1 1 auto;
+
+    & > * {
+      flex: 1 1 auto;
+    }
+    & > *:last-child,
+    & > *:first-child {
+      width: 25%;
+      flex: 0 0 auto;
+    }
   }
 }
 .board_info{
@@ -183,8 +184,6 @@ main{
   }
 }
 .ojnum_info{
-  margin-left: -25px;
-  width: 500px;
   display: flex;
   flex-wrap: wrap;
   margin-top: 70px;
