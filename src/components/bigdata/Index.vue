@@ -9,7 +9,28 @@
           </div>
         </div>
       </board>
-      <center-map />
+      <center-map
+        v-slot="{ current }"
+        :data="mapData"
+      >
+        <div class="message">
+          <div class="title">{{current.name}}</div>
+          <div class="body">
+            <div class="item">
+              <div class="label">检查数</div>
+              <div class="primary">{{current.extra.primary}}</div>
+            </div>
+            <div class="item">
+              <div class="label">问题数</div>
+              <div class="warning">{{current.extra.warning}}</div>
+            </div>
+            <div class="item">
+              <div class="label">整改数量</div>
+              <div class="danger">{{current.extra.danger}}</div>
+            </div>
+          </div>
+        </div>
+      </center-map>
       <board label="督查考核合格率">
           <pass-rate />
       </board>
@@ -110,7 +131,35 @@ export default {
           num: '7',
           cell: '无法明确执法主体'
         }
-      ]
+      ],
+      mapData: [
+        {
+          name: '九龙湖中队',
+          position: [121.72226, 29.955],
+          extra: {
+            primary: 149,
+            warning: 149,
+            danger: 149
+          }
+        },
+        {
+          name: '澥浦中队',
+          position: [121.65, 30],
+          extra: {
+            primary: 44,
+            warning: 122,
+            danger: 44
+          }
+        },
+        {
+          name: '石化区中队',
+          position: [121.600, 29.955],
+          extra: {
+            primary: 121,
+            warning: 123,
+            danger: 44
+          }
+        }]
     }
   },
   mounted () {
@@ -186,6 +235,36 @@ export default {
         font-size: 14px;
       }
     }
+  }
+}
+.message{
+  border-top: 2px solid #3479c5;
+  background: linear-gradient(#042e5e,#080808);
+  padding: 10px;
+  font-weight: bold;
+  .title{
+    margin-bottom: 10px;
+  }
+
+  .body{
+    display: flex;
+    text-align:center;
+
+    & > * + *{
+      margin-left: 20px;
+    }
+  }
+
+  .primary{
+    color:#33a5c6
+  }
+
+  .warning{
+    color:#ffc600
+  }
+
+  .danger{
+    color:#dc4c4d
   }
 }
 </style>
