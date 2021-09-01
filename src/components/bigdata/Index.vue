@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <div class="up">
+  <div class="container">
+    <div class="top">
       <board class="board" label="各街区监控数据">
         <div class="board_info">
           <div class="board_tabinfo" v-for="(t, index) in tab" :key="index">
@@ -14,7 +14,7 @@
           <pass-rate />
       </board>
     </div>
-    <div class="down">
+    <div class="bottom">
     <board class="board" label="检查类型统计">
       <horizontal />
       </board>
@@ -35,7 +35,7 @@
         <bar id="mulit"/>
       </board>
     </div>
-  </main>
+  </div>
 </template>
 <script>
 import Board from './components/Board'
@@ -120,29 +120,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-main{
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-
-  .up,
-  .down{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 50%;
-    flex: 1 1 auto;
-
-    & > * {
-      flex: 1 1 auto;
-    }
-    & > *:last-child,
-    & > *:first-child {
-      width: 25%;
-      flex: 0 0 auto;
-    }
-  }
-}
+@import url('@/assets/css/bigdata.less');
 .board_info{
   width: 350px;
   display: flex;

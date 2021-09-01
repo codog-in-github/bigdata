@@ -14,7 +14,7 @@
           />
       </board>
       <center-map />
-      <board>
+      <board label="出店经营区域排行">
         <horizontal />
       </board>
     </div>
@@ -91,14 +91,5 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.container{
-  display: flex;
-  flex-flow: column nowrap;
-}
-.bottom,
-.top{
-  height: 50%;
-  display: flex;
-  justify-content: space-between;
-}
+@import url('@/assets/css/bigdata.less');
 </style>
