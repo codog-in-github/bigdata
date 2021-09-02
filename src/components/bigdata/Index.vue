@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <div class="up">
+  <div class="container">
+    <div class="top">
       <board class="board" label="各街区监控数据">
         <div class="board_info">
           <div class="board_tabinfo" v-for="(t, index) in tab" :key="index">
@@ -9,12 +9,33 @@
           </div>
         </div>
       </board>
-      <center-map />
+      <center-map
+        v-slot="{ current }"
+        :data="mapData"
+      >
+        <div class="message">
+          <div class="title">{{current.name}}</div>
+          <div class="body">
+            <div class="item">
+              <div class="label">检查数</div>
+              <div class="primary">{{current.extra.primary}}</div>
+            </div>
+            <div class="item">
+              <div class="label">问题数</div>
+              <div class="warning">{{current.extra.warning}}</div>
+            </div>
+            <div class="item">
+              <div class="label">整改数量</div>
+              <div class="danger">{{current.extra.danger}}</div>
+            </div>
+          </div>
+        </div>
+      </center-map>
       <board label="督查考核合格率">
           <pass-rate />
       </board>
     </div>
-    <div class="down">
+    <div class="bottom">
     <board class="board" label="检查类型统计">
       <horizontal />
       </board>
@@ -35,7 +56,7 @@
         <bar id="mulit"/>
       </board>
     </div>
-  </main>
+  </div>
 </template>
 <script>
 import Board from './components/Board'
@@ -110,7 +131,35 @@ export default {
           num: '7',
           cell: '无法明确执法主体'
         }
-      ]
+      ],
+      mapData: [
+        {
+          name: '九龙湖中队',
+          position: [121.72226, 29.955],
+          extra: {
+            primary: 149,
+            warning: 149,
+            danger: 149
+          }
+        },
+        {
+          name: '澥浦中队',
+          position: [121.65, 30],
+          extra: {
+            primary: 44,
+            warning: 122,
+            danger: 44
+          }
+        },
+        {
+          name: '石化区中队',
+          position: [121.600, 29.955],
+          extra: {
+            primary: 121,
+            warning: 123,
+            danger: 44
+          }
+        }]
     }
   },
   mounted () {
@@ -120,29 +169,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-main{
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-
-  .up,
-  .down{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 50%;
-    flex: 1 1 auto;
-
-    & > * {
-      flex: 1 1 auto;
-    }
-    & > *:last-child,
-    & > *:first-child {
-      width: 25%;
-      flex: 0 0 auto;
-    }
-  }
-}
+@import url('@/assets/css/bigdata.less');
 .board_info{
   width: 350px;
   display: flex;
@@ -208,6 +235,36 @@ main{
         font-size: 14px;
       }
     }
+  }
+}
+.message{
+  border-top: 2px solid #3479c5;
+  background: linear-gradient(#042e5e,#080808);
+  padding: 10px;
+  font-weight: bold;
+  .title{
+    margin-bottom: 10px;
+  }
+
+  .body{
+    display: flex;
+    text-align:center;
+
+    & > * + *{
+      margin-left: 20px;
+    }
+  }
+
+  .primary{
+    color:#33a5c6
+  }
+
+  .warning{
+    color:#ffc600
+  }
+
+  .danger{
+    color:#dc4c4d
   }
 }
 </style>

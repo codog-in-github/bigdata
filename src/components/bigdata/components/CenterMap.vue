@@ -1,21 +1,8 @@
 <template>
 <div class="map-box">
-  <div class="message">
-    <div class="title">招宝山中队</div>
-    <div class="body">
-      <div class="item">
-        <div class="label">检查数</div>
-        <div class="primary">679</div>
-      </div>
-      <div class="item">
-        <div class="label">问题数</div>
-        <div class="warning">162</div>
-      </div>
-      <div class="item">
-        <div class="label">整改数量</div>
-        <div class="danger">25</div>
-      </div>
-    </div>
+  <div class="message-box">
+    <slot :current="current">
+    </slot>
   </div>
  <div id="map" class="map"></div>
 </div>
@@ -24,6 +11,30 @@
 import zhenghaiMap from '../zhenghai.json'
 export default {
   components: {
+
+  },
+  props: {
+    data: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data () {
+    return {
+      current: {}
+    }
+  },
+  created () {
+    this.current = this.data[0]
+  },
+  computed: {
+    points () {
+      return this.data.map(item => ({
+        name: item.name,
+        value: item.position,
+        origin: item
+      }))
+    }
   },
   mounted () {
     const map = this.$echarts.init(document.getElementById('map'))
@@ -81,20 +92,7 @@ export default {
           coordinateSystem: 'geo',
           symbolSize: 50,
           symbol: 'pin',
-          data: [
-            {
-              name: '招宝山中队',
-              value: [121.72226, 29.955]
-            },
-            {
-              name: '招宝山中队',
-              value: [121.65, 30]
-            },
-            {
-              name: '招宝山中队',
-              value: [121.600, 29.955]
-            }
-          ],
+          data: this.points,
           label: {
             show: true,
             position: 'bottom',
@@ -107,6 +105,11 @@ export default {
           z: 0
         }
       ]
+    })
+    map.on('click', params => {
+      if (params.componentType === 'series') {
+        this.current = params.data.origin
+      }
     })
   },
   method: {
@@ -123,39 +126,11 @@ export default {
     height: 100%;
   }
 
-  .message{
+  .message-box{
     position: absolute;
     right: 0;
     top: 0;
-
-    border-top: 2px solid #3479c5;
-    background: linear-gradient(#042e5e,#080808);
-    padding: 10px;
-    font-weight: bold;
-    .title{
-      margin-bottom: 10px;
-    }
-
-    .body{
-      display: flex;
-      text-align:center;
-
-      & > * + *{
-        margin-left: 20px;
-      }
-    }
-
-    .primary{
-      color:#33a5c6
-    }
-
-    .warning{
-      color:#ffc600
-    }
-
-    .danger{
-      color:#dc4c4d
-    }
   }
+
 }
 </style>
