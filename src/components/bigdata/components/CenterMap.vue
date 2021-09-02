@@ -74,16 +74,14 @@ export default {
         label: {
           normal: {
             show: false
-          },
-          emphasis: {
-            show: false
           }
         },
         roam: false,
         itemStyle,
-        emphasis: {
-          itemStyle
-        }
+        // emphasis: {
+        //   itemStyle
+        // }
+        silent: true
       },
       series: [
         {

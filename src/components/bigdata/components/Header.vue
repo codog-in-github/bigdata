@@ -8,7 +8,7 @@
         <div><span class="title-text">大数据可视化平台</span></div>
       </div>
       <div class="nav-item-box" :class="{active:false}"><span class="gradient-text">数字化场景</span></div>
-      <div class="nav-item-box" :class="{active:false}"><span class="gradient-text">综合查询</span></div>
+      <div @click="push('/big-data-cq')"  class="nav-item-box" :class="{active:$route.path === '/big-data-cq'}" ><span class="gradient-text">综合查询</span></div>
       <div class="nav-item-box" :class="{active:false}"><span class="gradient-text">智慧监控</span></div>
     </nav>
   </header>

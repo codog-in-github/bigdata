@@ -33,7 +33,7 @@ export default {
   height: 100%;
 }
 .label{
-  width: 300px;
+  width: 100%;
   padding: 10px 0 10px 20px;
   background: linear-gradient(to right, rgba(3, 58, 122, 1), rgba(3, 58, 122, 0)) ;
   border-radius: 3px;
