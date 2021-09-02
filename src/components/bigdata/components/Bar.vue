@@ -69,6 +69,11 @@ export default {
       default: true
     }
   },
+  data () {
+    return {
+      chart: null
+    }
+  },
   computed: {
     xData () {
       return this.data.map(item => item.name)
@@ -110,53 +115,66 @@ export default {
     }
   },
   mounted () {
-    const chart = this.$echarts.init(document.getElementById(this.id))
-    chart.setOption({
-      grid: {
-        show: false,
-        left: 30,
-        right: 0,
-        top: 20
-      },
-      legend: this.legend,
-      xAxis: {
-        data: this.xData,
-        color: '#fff',
-        axisLabel: {
-          rotate: 30,
-          color: '#2297df',
-          fontSize: 9
+    this.chart = this.$echarts.init(document.getElementById(this.id))
+    this.updateChart()
+  },
+  methods: {
+    updateChart () {
+      this.chart.setOption({
+        grid: {
+          show: false,
+          left: 30,
+          right: 0,
+          top: 20
         },
-        axisLine: {
-          show: this.xLine,
-          lineStyle: {
-            color: '#2297df'
+        legend: this.legend,
+        xAxis: {
+          data: this.xData,
+          color: '#fff',
+          axisLabel: {
+            rotate: 30,
+            color: '#2297df',
+            fontSize: 9
+          },
+          axisLine: {
+            show: this.xLine,
+            lineStyle: {
+              color: '#2297df'
+            }
+          },
+          axisTick: {
+            show: false
           }
         },
-        axisTick: {
-          show: false
-        }
-      },
-      yAxis: {
-        splitNumber: 4,
-        splitLine: {
-          show: this.yLine
-        },
-        axisLine: {
-          show: this.yLine,
-          lineStyle: {
-            color: '#2297df'
+        yAxis: {
+          splitNumber: 4,
+          splitLine: {
+            show: this.yLine
+          },
+          axisLine: {
+            show: this.yLine,
+            lineStyle: {
+              color: '#2297df'
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            show: this.yLabel
           }
         },
-        axisTick: {
-          show: false
-        },
-        axisLabel: {
-          show: this.yLabel
-        }
-      },
-      series: this.series
-    })
+        series: this.series
+      })
+    }
+  },
+  watch: {
+    data: {
+      deep: true,
+      handler () {
+        this.updateChart()
+      }
+    }
   }
 }
 </script>

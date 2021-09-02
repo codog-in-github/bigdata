@@ -26,6 +26,9 @@ const routes = [
       }, {
         path: '/big-data-storeonething',
         component: () => import('@/components/bigdata/storeonething.vue')
+      }, {
+        path: '/big-data-cq',
+        component: () => import('@/components/bigdata/ComposetQuery.vue')
       }
 
     ]
