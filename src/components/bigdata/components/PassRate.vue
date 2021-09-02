@@ -5,10 +5,24 @@
 export default {
   components: {
   },
+  props: {
+    data: {
+      type: Array,
+      default: () => [
+        { label: '招宝山中队', value: 92.8 },
+        { label: '澥浦中队', value: 81.1 },
+        { label: '九龙湖中队', value: 82.4 },
+        { label: '庄市中队', value: 89.2 },
+        { label: '蛟川中队', value: 90.6 },
+        { label: '骆驼中队', value: 93.5 },
+        { label: '石化区中队', value: 86.6 }
+      ]
+    }
+  },
   mounted () {
     const testPass = this.$echarts.init(document.getElementById('chart'))
-    const xData = ['招宝山中队', '澥浦中队', '九龙湖中队', '庄市中队', '蛟川中队', '骆驼中队', '石化区中队']
-    const data = [92.8, 81.1, 82.4, 89.2, 90.6, 93.5, 86.6]
+    const xData = this.data.map(item => item.label)
+    const data = this.data.map(item => item.value)
     const iconData = []
     data.forEach((item) => {
       iconData.push({

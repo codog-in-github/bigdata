@@ -2,11 +2,40 @@
     <div :id="id"></div>
 </template>
 <script>
+const sigleSeriesDefault = {
+  type: 'bar',
+  barWidth: 10
+}
+const sigleItemStyleDefault = {
+  color: {
+    x: 0,
+    y: 0,
+    x2: 0,
+    y2: 1,
+    type: 'linear',
+    global: false,
+    colorStops: [
+      {
+        offset: 0,
+        color: '#89dfff'
+      },
+      {
+        offset: 1,
+        color: '#0aa0ff'
+      }
+    ]
+  }
+}
+
+const legendDefault = {
+  display: false
+}
+
 export default {
   props: {
     id: {
       type: String,
-      default: 'barChart'
+      default: 'bar-chart'
     },
     data: {
       type: Array,
@@ -43,6 +72,41 @@ export default {
   computed: {
     xData () {
       return this.data.map(item => item.name)
+    },
+    series () {
+      if (this.data[0]?.value) {
+        if (this.data[0].value instanceof Object) {
+          const ser = []
+          for (const name in this.data[0].value) {
+            ser.push({
+              ...sigleSeriesDefault,
+              name,
+              itemStyle: sigleItemStyleDefault,
+              data: this.data.map(item => item.value[name])
+            })
+          }
+          return ser
+        } else {
+          return [{
+            ...sigleSeriesDefault,
+            itemStyle: sigleItemStyleDefault,
+            data: this.data
+          }]
+        }
+      }
+      return []
+    },
+    legend () {
+      if (this.data?.[0] && this.data[0].value instanceof Object) {
+        return {
+          ...legendDefault,
+          display: true
+        }
+      } else {
+        return {
+          ...legendDefault
+        }
+      }
     }
   },
   mounted () {
@@ -54,6 +118,7 @@ export default {
         right: 0,
         top: 20
       },
+      legend: this.legend,
       xAxis: {
         data: this.xData,
         color: '#fff',
@@ -90,32 +155,7 @@ export default {
           show: this.yLabel
         }
       },
-      series: [{
-        name: 'Sale',
-        type: 'bar',
-        data: this.data,
-        itemStyle: {
-          color: {
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            type: 'linear',
-            global: false,
-            colorStops: [
-              {
-                offset: 0,
-                color: '#89dfff'
-              },
-              {
-                offset: 1,
-                color: '#0aa0ff'
-              }
-            ]
-          }
-        },
-        barWidth: 10
-      }]
+      series: this.series
     })
   }
 }

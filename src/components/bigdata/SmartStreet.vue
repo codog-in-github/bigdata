@@ -63,7 +63,7 @@
         <bar
           id="saler"
           style="width:100%;height:300px;"
-          :data="trashData"
+          :data="trashData1"
           :x-line="false"
           :y-line="false"
           :y-label="false"
@@ -111,6 +111,15 @@ export default {
         { name: '蛟川中队', value: 14 },
         { name: '骆驼中队', value: 13 },
         { name: '石化区中队', value: 9 }
+      ],
+      trashData1: [
+        { name: '招宝山中队', value: { 已处理: 22, 未处理: 1 } },
+        { name: '澥浦中队', value: { 已处理: 13, 未处理: 3 } },
+        { name: '九龙湖中队', value: { 已处理: 14, 未处理: 4 } },
+        { name: '庄市中队', value: { 已处理: 31, 未处理: 3 } },
+        { name: '蛟川中队', value: { 已处理: 14, 未处理: 2 } },
+        { name: '骆驼中队', value: { 已处理: 13, 未处理: 1 } },
+        { name: '石化区中队', value: { 已处理: 9, 未处理: 3 } }
       ],
       mapData: [
         {
