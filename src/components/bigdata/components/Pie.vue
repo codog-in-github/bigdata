@@ -13,6 +13,14 @@ export default {
         { name: '三乱整治', value: 20 }
       ]
     },
+    shadowradius: {
+      type: Array,
+      defalt: () => []
+    },
+    icon: {
+      type: String,
+      defalt: () => 'rect'
+    },
     pieRadius: {
       type: Array,
       default: () => ['34%', '45%']
@@ -34,21 +42,8 @@ export default {
       })
     }
   },
-  computed: {
-    seriesData () {
-      return this.data
-    },
-    legendData () {
-      return this.data.map(i => i.name)
-    }
-  },
-  mounted () {
-    const myChart = this.$echarts.init(document.getElementById('pie'))
-    const legend = this.legendData
-    const option = {
-      tooltip: {
-        show: true
-      },
+  data () {
+    return {
       series: [
         {
           type: 'pie',
@@ -57,7 +52,7 @@ export default {
           hoverAnimation: true,
           z: 10,
           itemStyle: {
-            borderWidth: 1,
+            borderWidth: 2,
             borderColor: this.pieBorder
           },
           label: {
@@ -69,10 +64,47 @@ export default {
             show: false
           }
         }
-      ],
+      ]
+    }
+  },
+  methods: {
+    seriesshadow () {
+      if (this.shadowradius) {
+        this.series.push({
+          type: 'pie',
+          radius: this.shadowradius,
+          center: this.piePosition,
+          z: 11,
+          data: [100],
+          tooltip: {
+            show: false
+          },
+          silent: true,
+          color: ['rgba(15,15,15,0.3)']
+        })
+      }
+    }
+  },
+  computed: {
+    seriesData () {
+      return this.data
+    },
+    legendData () {
+      return this.data.map(i => i.name)
+    }
+  },
+  mounted () {
+    this.seriesshadow()
+    const myChart = this.$echarts.init(document.getElementById('pie'))
+    const legend = this.legendData
+    const option = {
+      tooltip: {
+        show: true
+      },
+      series: this.series,
       legend: {
         orient: 'vertical',
-        icon: 'rect',
+        icon: this.icon,
         ...this.legendPosition,
         textStyle: {
           align: 'left',
