@@ -40,7 +40,7 @@
         />
       </board>
       <board label="流浪犬分布情况">
-        <Line :id="dog"></Line>
+        <curve id="dog"></curve>
       </board>
     </div>
   </div>
@@ -50,7 +50,7 @@ import Bar from './components/Bar.vue'
 import Board from './components/Board'
 import CenterMap from './components/CenterMap'
 import Horizontal from './components/Horizontal'
-import Line from './components/Line.vue'
+import Curve from './components/Curve.vue'
 import Pie from './components/Pie'
 export default {
   name: 'index',
@@ -60,7 +60,7 @@ export default {
     Bar,
     CenterMap,
     Horizontal,
-    Line
+    Curve
   },
   Horizontalata () {
     return {

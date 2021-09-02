@@ -3,8 +3,8 @@
     <nav>
       <div @click="push('/big-data-index')" class="nav-item-box" :class="{active:$route.path === '/big-data-index'}"><span class="gradient-text">首页</span></div>
       <div @click="push('/big-data-smartstreet')" class="nav-item-box" :class="{active:$route.path === '/big-data-smartstreet'}"><span class="gradient-text">智慧街区</span></div>
-      <div class="nav-item-box" :class="{active:false}"><span class="gradient-text">店铺一件事</span></div>
-      <div class="title" style="width: 30%">
+      <div @click="push('/big-data-storeonething')" class="nav-item-box" :class="{active:$route.path === '/big-data-storeonething'}"><span class="gradient-text">店铺一件事</span></div>
+      <div class="title" style="width: 30%">0
         <div><span class="title-text">大数据可视化平台</span></div>
       </div>
       <div class="nav-item-box" :class="{active:false}"><span class="gradient-text">数字化场景</span></div>
