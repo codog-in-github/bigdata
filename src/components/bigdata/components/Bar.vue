@@ -74,7 +74,7 @@ export default {
       return this.data.map(item => item.name)
     },
     series () {
-      if (this.data[0]?.value) {
+      if (this.data[0]) {
         if (this.data[0].value instanceof Object) {
           const ser = []
           for (const name in this.data[0].value) {
@@ -97,7 +97,7 @@ export default {
       return []
     },
     legend () {
-      if (this.data?.[0] && this.data[0].value instanceof Object) {
+      if (this.data && this.data[0].value instanceof Object) {
         return {
           ...legendDefault,
           display: true

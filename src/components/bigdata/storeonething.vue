@@ -33,7 +33,7 @@
         </div>
       </board>
       <board class="board" label="检查类型统计">
-        <pie/>
+        <pie :data="piedata" :legendPosition="{bottom: 70,right:60}" pieRadius="['60%','80%']" piePosition="['40%','50%']" icon="circle" shadowradio="['60%','75%']"/>
       </board>
     </div>
   </main>
@@ -60,6 +60,14 @@ export default {
   },
   data () {
     return {
+      piedata: [
+        { name: '市容', value: 20 },
+        { name: '污水', value: 15 },
+        { name: '燃气', value: 10 },
+        { name: '油烟', value: 15 },
+        { name: '垃圾', value: 20 },
+        { name: '其他', value: 40 }
+      ],
       curvedata: [
         { label: '招宝山中队', value: 50 },
         { label: '澥浦中队', value: 75 },
