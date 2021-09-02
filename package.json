@@ -14,7 +14,7 @@
     "caniuse-lite": "^1.0.30001248",
     "core-js": "^3.6.5",
     "crypto-js": "^4.0.0",
-    "echarts": "^4.9.0",
+    "echarts": "^4.8.0",
     "element-ui": "^2.13.2",
     "jsencrypt": "^3.0.0-rc.1",
     "jsplumb": "^2.14.6",

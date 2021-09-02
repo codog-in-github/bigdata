@@ -23,6 +23,9 @@ const routes = [
       }, {
         path: '/big-data-smartstreet',
         component: () => import('@/components/bigdata/SmartStreet.vue')
+      }, {
+        path: '/big-data-storeonething',
+        component: () => import('@/components/bigdata/storeonething.vue')
       }
 
     ]
