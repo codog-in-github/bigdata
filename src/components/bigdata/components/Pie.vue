@@ -1,9 +1,13 @@
 <template>
-  <div id='pie' class="box"></div>
+  <div :id='id' class="box"></div>
 </template>
 <script>
 export default {
   props: {
+    id: {
+      type: String,
+      default: 'pie-chart'
+    },
     data: {
       type: Array,
       default: () => [
@@ -13,9 +17,9 @@ export default {
         { name: '三乱整治', value: 20 }
       ]
     },
-    shadowradius: {
+    shadowRadius: {
       type: Array,
-      defalt: () => []
+      defalt: false
     },
     icon: {
       type: String,
@@ -44,35 +48,69 @@ export default {
   },
   data () {
     return {
-      series: [
-        {
-          type: 'pie',
-          radius: this.pieRadius,
-          center: this.piePosition,
-          hoverAnimation: true,
-          z: 10,
-          itemStyle: {
-            borderWidth: 2,
-            borderColor: this.pieBorder
-          },
-          label: {
-            show: false,
-            formatter: data => this.seriesData[data.dataIndex].value
-          },
-          data: this.seriesData,
-          labelLine: {
-            show: false
-          }
-        }
-      ]
+      chart: null
     }
   },
   methods: {
-    seriesshadow () {
-      if (this.shadowradius) {
-        this.series.push({
+    updateChart () {
+      this.chart.setOption({
+        tooltip: {
+          show: true
+        },
+        series: this.series,
+        legend: {
+          orient: 'vertical',
+          icon: this.icon,
+          ...this.legendPosition,
+          textStyle: {
+            align: 'left',
+            verticalAlign: 'middle',
+            rich: {
+              name: {
+                color: 'rgba(255,255,255,0.7)',
+                fontSize: 12
+              },
+              value: {
+                color: 'rgba(255,255,255,0.5)',
+                fontSize: 10
+              },
+              rate: {
+                color: 'rgba(255,255,255,0.9)',
+                fontSize: 10
+              }
+            }
+          },
+          data: this.legendData,
+          formatter: name => `{name|${name}}`
+        }
+      })
+    }
+  },
+  computed: {
+    series () {
+      const ser = [{
+        type: 'pie',
+        radius: this.pieRadius,
+        center: this.piePosition,
+        hoverAnimation: true,
+        z: 10,
+        itemStyle: {
+          borderWidth: 2,
+          borderColor: this.pieBorder
+        },
+        label: {
+          show: false,
+          formatter: data => this.seriesData[data.dataIndex].value
+        },
+        data: this.seriesData,
+        labelLine: {
+          show: false
+        }
+      }]
+      if (this.shadowRadius) {
+        ser.push({
           type: 'pie',
-          radius: this.shadowradius,
+          radius: this.shadowRadius,
           center: this.piePosition,
           z: 11,
           data: [100],
@@ -83,9 +121,8 @@ export default {
           color: ['rgba(15,15,15,0.3)']
         })
       }
-    }
-  },
-  computed: {
+      return ser
+    },
     seriesData () {
       return this.data
     },
@@ -94,41 +131,16 @@ export default {
     }
   },
   mounted () {
-    this.seriesshadow()
-    const myChart = this.$echarts.init(document.getElementById('pie'))
-    const legend = this.legendData
-    const option = {
-      tooltip: {
-        show: true
-      },
-      series: this.series,
-      legend: {
-        orient: 'vertical',
-        icon: this.icon,
-        ...this.legendPosition,
-        textStyle: {
-          align: 'left',
-          verticalAlign: 'middle',
-          rich: {
-            name: {
-              color: 'rgba(255,255,255,0.7)',
-              fontSize: 12
-            },
-            value: {
-              color: 'rgba(255,255,255,0.5)',
-              fontSize: 10
-            },
-            rate: {
-              color: 'rgba(255,255,255,0.9)',
-              fontSize: 10
-            }
-          }
-        },
-        data: legend,
-        formatter: name => `{name|${name}}`
+    this.chart = this.$echarts.init(document.getElementById(this.id))
+    this.updateChart()
+  },
+  watch: {
+    data: {
+      deep: true,
+      handler () {
+        this.updateChart()
       }
     }
-    myChart.setOption(option)
   }
 }
 </script>

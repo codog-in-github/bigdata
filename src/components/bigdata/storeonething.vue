@@ -33,7 +33,15 @@
         </div>
       </board>
       <board class="board" label="检查类型统计">
-        <pie :data="piedata" :legendPosition="{bottom: 70,right:60}" pieRadius="['60%','80%']" piePosition="['40%','50%']" icon="circle" shadowradio="['60%','75%']"/>
+        <pie
+          id="check-type"
+          :data="piedata"
+          :legendPosition="{bottom: 70,right:60}"
+          :pie-radius="['60%','80%']"
+          :pie-position="['40%','50%']"
+          icon="circle"
+          :shadow-radius="['60%','75%']"
+          />
       </board>
     </div>
   </main>
