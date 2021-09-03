@@ -149,7 +149,7 @@ export default {
         yAxis: {
           splitNumber: 4,
           splitLine: {
-            show: this.yLine
+            show: false
           },
           axisLine: {
             show: this.yLine,
@@ -161,7 +161,6 @@ export default {
             show: false
           },
           axisLabel: {
-            show: this.yLabel
           }
         },
         series: this.series
