@@ -12,15 +12,15 @@
       </board>
       <center-map />
           <board class="board" label="队员排行| 网格得分排名">
-      <horizontal />
+            <rank :data="teamRank"></rank>
       </board>
     </div>
     <div class="down">
       <board label="督查考核合格率">
           <pass-rate />
       </board>
-      <board class="board" label="各中队执法情况">
-        <bar id="mulit"/>
+      <board class="board" label="各中队执法情况" style="width:500px">
+        <enforcement />
       </board>
       <board class="board" label="执法对象数量">
         <div class="ojnum_info">
@@ -50,10 +50,10 @@
 import Board from './components/Board'
 import PassRate from './components/PassRate'
 import CenterMap from './components/CenterMap'
-import Bar from './components/Bar'
-import Horizontal from './components/Horizontal'
 import Pie from './components/Pie'
 import Curve from './components/Curve.vue'
+import Rank from './components/Rank.vue'
+import Enforcement from './components/Enforcement.vue'
 
 export default {
   name: 'index',
@@ -61,13 +61,21 @@ export default {
     Board,
     PassRate,
     CenterMap,
-    Bar,
-    Horizontal,
     Pie,
-    Curve
+    Curve,
+    Rank,
+    Enforcement
   },
   data () {
     return {
+      teamRank: [
+        ['姓名', '分数'],
+        ['招宝山中队', '100'],
+        ['招宝山中队', '200'],
+        ['招宝山中队', '123'],
+        ['招宝山中队', '435'],
+        ['招宝山中队', '123']
+      ],
       piedata: [
         { name: '市容', value: 20 },
         { name: '污水', value: 15 },
@@ -130,7 +138,7 @@ main{
     flex-direction: row;
     justify-content: space-between;
     height: 50%;
-    flex: 1 1 auto;
+    // flex: 1 1 auto;
 
     & > * {
       flex: 1 1 auto;
